@@ -2,7 +2,7 @@ package com.kafkaanalyzer.infra
 
 import java.util
 
-import com.kafkaanalyzer.Protocol
+import com.kafkaanalyzer.protocol.Protocol
 import io.sphere.json.fromJSON
 import org.apache.kafka.common.serialization.Deserializer
 

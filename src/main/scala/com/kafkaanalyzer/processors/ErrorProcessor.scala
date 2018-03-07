@@ -1,9 +1,11 @@
-package com.kafkaanalyzer
+package com.kafkaanalyzer.processors
 
 import akka.kafka.scaladsl.Consumer
 import akka.kafka.{ConsumerSettings, Subscriptions}
 import akka.stream.ActorMaterializer
-import com.kafkaanalyzer.Protocol.Error
+import com.kafkaanalyzer.protocol.Protocol
+import com.kafkaanalyzer.protocol.Protocol.Error
+import com.kafkaanalyzer.util.Topics
 
 class ErrorProcessor {
 

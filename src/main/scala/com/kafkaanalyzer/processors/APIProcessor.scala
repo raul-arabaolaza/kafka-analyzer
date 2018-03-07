@@ -1,9 +1,11 @@
-package com.kafkaanalyzer
+package com.kafkaanalyzer.processors
 
 import akka.kafka.scaladsl.{Consumer, Producer}
 import akka.kafka.{ConsumerSettings, ProducerSettings, Subscriptions}
 import akka.stream.ActorMaterializer
-import com.kafkaanalyzer.Protocol._
+import com.kafkaanalyzer.protocol.Protocol
+import com.kafkaanalyzer.protocol.Protocol._
+import com.kafkaanalyzer.util.Topics
 import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 class APIProcessor {

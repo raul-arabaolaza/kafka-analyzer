@@ -1,4 +1,4 @@
-package com.kafkaanalyzer
+package com.kafkaanalyzer.util
 
 object Topics {
 

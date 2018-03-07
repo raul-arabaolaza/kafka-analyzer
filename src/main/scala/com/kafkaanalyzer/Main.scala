@@ -4,6 +4,7 @@ import akka.actor.ActorSystem
 import akka.kafka.{ConsumerSettings, ProducerSettings}
 import akka.stream.ActorMaterializer
 import com.kafkaanalyzer.infra.{MessageDeserializer, MessageSerializer}
+import com.kafkaanalyzer.processors.{APIProcessor, ErrorProcessor, RequestResponseProcesor, RequestsProcessor}
 import com.typesafe.config.ConfigFactory
 import org.apache.kafka.clients.consumer.ConsumerConfig
 import org.apache.kafka.common.serialization.{ByteArrayDeserializer, ByteArraySerializer}

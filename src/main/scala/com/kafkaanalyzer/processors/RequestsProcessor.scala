@@ -1,32 +1,30 @@
-package com.kafkaanalyzer
+package com.kafkaanalyzer.processors
 
 import java.util.concurrent.TimeUnit
 
 import akka.actor.ActorSystem
 import akka.http.scaladsl.Http
-import akka.http.scaladsl.model.{HttpRequest, HttpResponse, ResponseEntity}
+import akka.http.scaladsl.model.HttpRequest
+import akka.http.scaladsl.unmarshalling.Unmarshal
 import akka.kafka.scaladsl.{Consumer, Producer}
 import akka.kafka.{ConsumerSettings, ProducerSettings, Subscriptions}
 import akka.stream.{ActorMaterializer, ThrottleMode}
-import akka.stream.scaladsl.Sink
-import com.kafkaanalyzer.Protocol.{Error, Message, Request, RequestResponse}
-import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
-import akka.http.scaladsl.unmarshalling.Unmarshal
-import io.sphere.json.JSON
-import io.sphere.json.generic.deriveJSON
+import com.kafkaanalyzer.protocol.Protocol
+import com.kafkaanalyzer.protocol.Protocol.{Request, Message, RequestResponse}
+import com.kafkaanalyzer.util.Topics
 import io.sphere.json._
+import io.sphere.json.generic.deriveJSON
+import org.apache.kafka.clients.producer.{KafkaProducer, ProducerRecord}
 
 import scala.concurrent.ExecutionContext.Implicits.global
-import scala.concurrent.Future
 import scala.concurrent.duration.FiniteDuration
-import scala.util.Try
 
 class RequestsProcessor(implicit val system: ActorSystem) {
 
   implicit val json = Protocol.json
   val responseJson = deriveJSON[RequestResponse]
 
-  val requestFlow = Http().cachedHostConnectionPool[Request]("www.randomtext.me")
+  val requestFlow = Http().cachedHostConnectionPool[Protocol.Request]("www.randomtext.me")
 
   def init(implicit consumerSettings: ConsumerSettings[Array[Byte], Protocol.Message],
            materializer: ActorMaterializer, producerSettings: ProducerSettings[Array[Byte], Protocol.Message],
