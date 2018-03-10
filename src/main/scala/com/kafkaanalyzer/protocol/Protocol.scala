@@ -7,8 +7,8 @@ object Protocol {
 
   sealed trait Message extends Serializable
 
-  case class Request(initialNumberOfParagraphs: Int /*,finalNumberOfParagraphs: Int, minimunNumberOfWords: Int,
-                     maximumNumberOfWords: Int*/) extends Message
+  case class InitiateTextAnalysis(id: Long, initialNumberOfParagraphs: Int ,finalNumberOfParagraphs: Int, minimunNumberOfWords: Int,
+                     maximumNumberOfWords: Int) extends Message
 
   // Typical util messages that imply an action
   case class RequestResponse(id: Int = 0, text_out: String) extends Message

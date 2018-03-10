@@ -22,7 +22,7 @@ class APIProcessor {
 
         cm.committableOffset.commitScaladsl()
         value match {
-          case request: Request => new ProducerRecord[Array[Byte], Message](Topics.Requests.name, request)
+          case request: InitiateTextAnalysis => new ProducerRecord[Array[Byte], Message](Topics.Requests.name, request)
           case Error(message) => new ProducerRecord[Array[Byte], Message](Topics.Errors.name, Error(s"Problem parsing json ${message}"))
           case unknown: Message => new ProducerRecord[Array[Byte], Message](Topics.Errors.name, Error(s"Unknown message type received"))
         }

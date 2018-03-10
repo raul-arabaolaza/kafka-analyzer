@@ -25,6 +25,7 @@ class RequestResponseProcesor {
 
     requestResponsesFromKafka.map(response => {
       response match {
+          // TODO need to remove the <p> and </p> tags
         case RequestResponse(id, text) => text.split("\\W+").foldLeft(Map.empty[String, Int]) {
           (count, word) => count + (word -> (count.getOrElse(word, 0) + 1))
         }
